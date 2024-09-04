@@ -5,7 +5,9 @@ import "font-awesome/css/font-awesome.css"
 
 // sociket io client for client side connection
 import { io } from "socket.io-client"
-import NewUser from './components/Login'
+
+import Login from './components/Login'
+import Chat from './components/Chat'
 
 
 function App() {
@@ -32,10 +34,8 @@ function App() {
       <main className='content '>
         <div className='constainer mt-3 '>
           {
-            user && <div>
-              Logged in as:  {user}
-
-            </div>
+            user && 
+           <Chat user={user}/>    
           }
 
           {
