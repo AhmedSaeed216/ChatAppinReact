@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-const NewUser = ({newUser,handleChange,lognewUser}) => {
+const Login = ({newUser,handleChange,lognewUser}) => {
 
     
   return (
@@ -35,4 +35,4 @@ const NewUser = ({newUser,handleChange,lognewUser}) => {
   )
 }
 
-export default NewUser
+export default Login
