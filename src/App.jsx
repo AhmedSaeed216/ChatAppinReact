@@ -5,7 +5,7 @@ import "font-awesome/css/font-awesome.css"
 
 // sociket io client for client side connection
 import { io } from "socket.io-client"
-import NewUser from './components/NewUser'
+import NewUser from './components/Login'
 
 
 function App() {
@@ -15,12 +15,13 @@ function App() {
 
   const handleChange = (e) => {
     setnewUser(e.target.value);
+    
     console.log(e);
   }
 
   const lognewUser = () => {
     setUser(newUser);
-    console.log(newUser);
+    console.log("new user nameis : "+newUser);
     // setnewUser("")
   }
 
@@ -39,7 +40,7 @@ function App() {
 
           {
             !user &&
-            <NewUser newUser={newUser} handleChange={handleChange} lognewUser={lognewUser}/>
+            <Login newUser={newUser} handleChange={handleChange} lognewUser={lognewUser}/>
           }
         </div>
       </main>
