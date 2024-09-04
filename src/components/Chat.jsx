@@ -4,7 +4,7 @@ const Chat = ({user}) => {
   return (
     <div className='w-full  border-4 border-gray-400 '>
             <div className="row vh-95">
-              <div className=' columns-lg  '>
+              <div className=' .?  '>
 
                 {/* chat header */}
                   <div className='py-2 px-4  w-full border drop-shadow-lg sticky bg-white rounded-lg'>
