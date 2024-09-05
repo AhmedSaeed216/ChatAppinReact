@@ -17,28 +17,6 @@ const Main = ({socket}) => {
 
     const [messages, setMessages] = useState([])
 
-
-    // useEffect(() => {
-    //     socket.on("users",(users)=>{
-    //         const messageArr=[]
-    //         for (const {userId,username} of users ) {
-                
-    //             const newMessage={type:"userstatus",userId,username}
-    //             messageArr.push(newMessage);
-    //         }
-    //         // setMessages([...messages,messageArr])
-    //         setMessages((prevMessages) => [...prevMessages, ...messageArr]);
-
-    //         setusers(users)
-    //             console.log(users)
-    //             // showing which user has joined
-    //     })
-    //   socket.on("session",({userId,username})=>{
-    //         setUser(userId,username);
-    //   })
-    
-      
-    // }, [socket,messages])
     
     useEffect(() => {
         socket.on("users", (users) => {
