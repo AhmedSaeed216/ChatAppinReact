@@ -18,15 +18,15 @@ const Main = ({socket}) => {
     const [messages, setMessages] = useState([])
 
     
+
     useEffect(() => {
         socket.on("users", (users) => {
-            const messageArr = [];
-            for (const { userId, username } of users) {
-                const newMessage = { type: "UserStatus", userId, username };
-                messageArr.push(newMessage);
-            }
-            // setMessages((prevMessages) => [...prevMessages, ...messageArr]);
-            setMessages([...messages,...messageArr])
+            const messageArr = users.map(({ userId, username }) => ({
+                type: "UserStatus",
+                userId,
+                username,
+            }));
+            setMessages((prevMessages) => [...prevMessages, ...messageArr]); // Use previous state
             setusers(users);
             console.log(users); // showing which user has joined
         });
@@ -35,9 +35,20 @@ const Main = ({socket}) => {
             setUser({ userId, username });
         });
     
+        socket.on("new message", ({ userId, username, message }) => {
+            const newMessage = {
+                type: "message",
+                userId: userId,
+                username: username,
+                message: message,
+            };
+            setMessages((prevMessages) => [...prevMessages, newMessage]); // Correct state update
+        });
+    
         return () => {
             socket.off("users");
             socket.off("session");
+            socket.off("new message");
         };
     }, [socket]);
     
@@ -55,12 +66,20 @@ const Main = ({socket}) => {
         // setnewUser("")
     }
 
+
+    const sendMessage=()=>{
+        socket.emit("new message",message);
+        const newMessage={type:"message", userId:user.userId,username:user.username,message}
+        setMessages([...messages,newMessage]);
+        setMessage("");
+
+    }
     return (
         <main className='content '>
             <div className='constainer mt-3 '>
                 {
                     user.userId &&
-                    <Chat user={user} setMessage={setMessage} message={message} messages={messages}/>
+                    <Chat user={user} sendMessage={sendMessage} message={message} messages={messages} setMessage={setMessage}/>
                 }
 
                 {
