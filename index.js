@@ -40,6 +40,16 @@ io.on("connection", (socket) => {
 
   // Emit the session data to the client
   socket.emit("session", { userId: socket.userId, username: socket.username });
+
+  // send message
+  socket.on("new message",(message)=>{
+      socket.broadcast.emit("new message",{
+        userId: socket.userId,
+        username:socket.username,
+        message
+
+      })
+  })
 });
 
 const PORT = process.env.PORT || 5000;
